@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Question
+{% endblock title %}
+{% block content %}
+
+<div class="container marketing col-lg-12">
+ 		<div class="col-lg-3" align="center">	
+        	<img class="img-circle" 
+        	src="http://cs4.pikabu.ru/images/big_size_comm/2014-09_3/1410642548121.jpg" alt="Generic placeholder image" width="140" height="140"> 
+        	<p ><a href="user_id" >Кирюха</a></p>
+
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-9">
+        	<!--<h4 style="margin-top:2vw">How this: just do it? I don't know how it. Pleeeease, help me</h4>-->
+        	<h4 style="margin-top:2vw">{{question.title}}</h4>
+        	<h5><a>Answers: 3</a></h5>
+        	<div style="margin-top:0.5vw">
+            Tags: <a>tag</a>, <a>another tag</a>
+            </div>
+        </div>
+        <div class="col-lg-12" align="center">
+
+        <hr class="featurette-divider">
+        	<h2>Answer</h2>
+        </div>
+	    
+	    {% for a in question.answer_set.all|slice:":3" %}
+	    <div class="col-lg-12">
+	    <hr class="featurette-divider">
+	        <div class="col-lg-2" align="center">	
+	        	<img class="img-circle" 
+	        	src="http://cs4.pikabu.ru/images/big_size_comm/2014-09_3/1410642548121.jpg" alt="Generic placeholder image" width="70" height="70"> 
+	        	<p ><a href="user_id" >Аркаша</a></p>
+	        	<p ><a href="rating" >rating : 10</a></p>
+	        </div><!-- /.col-lg-4 -->
+	        <div class="col-lg-10">
+	        	<p style="margin-top:2vw">{{a}}</p>
+	        </div>
+        </div>
+
+       {% endfor %} 
+</div>
+
+{% endblock content %}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home
+{% endblock title %}
+{% block content %}
+<!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+    
+     
+
+   
+    <div class="container marketing col-lg-12">
+    <h1 align="center">Frequently Asked Questions</h1>
+    
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        {% for q in freqAsk %}
+        <div class="col-lg-4">
+          <img class="img-circle" src="http://cs4.pikabu.ru/images/big_size_comm/2014-09_3/1410642548121.jpg" alt="Generic placeholder image" width="140" height="140">
+          <!--<h2>{{q.title}}</h2>
+          <p>{{q.text}}</p>-->
+          <h2 class="featurette-heading"><a href="{% url 'question' q.id %}">{{q.title}}</a> <span class="text-muted"> <h5>{{q.text}}</h5></span></h2>
+          <p><a class="btn btn-default" href="{% url 'question' q.id %}" role="button">View details &raquo;</a></p>
+        </div>
+        {% endfor %}
+      </div><!-- /.row -->
+
+
+      {% block questions_block %}
+
+      {% if questions %}
+      {% for q in questions %}
+        <hr class="featurette-divider">
+        {% if forloop.counter|divisibleby:"2" %}
+            <div class="row featurette">
+              <div class="col-lg-5">
+                <h2 class="featurette-heading"><a href="{% url 'question' q.id %}">{{q.title}}#{{q.id}}</a> <span class="text-muted"> <h5>{{q.text}}</h5></span></h2>
+                <!--<p class="lead">You must take yourself</p>-->
+                <p><a class="btn btn-default" href="{% url 'question' q.id %}" role="button">View details &raquo;</a></p>
+              </div>
+              <div class="col-lg-3">
+                <div class="answers" style="margin-top:1vw">
+                    <h5><a>Answers: 3</a></h5>
+                    <div style="margin-top:0.5vw">
+                      Tags: <a>tag</a>, <a>another tag</a>
+                    </div>
+                    <h5>Rating: 10</h5>
+                    
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <img class="img-circle"src="http://cs4.pikabu.ru/images/big_size_comm/2014-09_3/1410642548121.jpg" alt="Generic placeholder image" width="140" height="140">
+              </div>
+            </div>
+        {% else %}
+             <div class="row">
+              <div class="col-lg-3">
+                <img class="img-circle"src="http://cs4.pikabu.ru/images/big_size_comm/2014-09_3/1410642548121.jpg" alt="Generic placeholder image" width="140" height="140">
+              </div>
+              <div class="col-lg-3">
+                <div class="answers" style="margin-top:1vw">
+                  <h5><a>Answers: 3</a></h5>
+                  <div style="margin-top:0.5vw">
+                    Tags: <a>tag</a>, <a>another tag</a>
+                  </div>
+                  <h5>Rating: 10</h5>   
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <h2 class="featurette-heading"><a href="{% url 'question' q.id %}">{{q.title}}#{{q.id}}</a><span class="text-muted"><h5>{{q.text}}</h5></span></h2>
+                <!--<p class="lead">It is important</p>-->
+                <p><a class="btn btn-default" href="{% url 'question' q.id %}" role="button">View details &raquo;</a></p>
+              </div>
+             </div>
+        {% endif %}
+      {% endfor %}
+      {% endif %}
+
+      {% endblock questions_block %}
+    </div>
+        
+{% endblock content %}
+
+ {% block pagination %}
+<div class="text-center container">
+  <ul class="pagination">
+    {% if questions.has_previous %}
+      <li><a href="/home/?page={{ questions.previous_page_number}}">«</a></li>
+    {% endif %}
+    {% if questions.number != 1 and questions.number != 2 %}
+      <li><a href="/home/?page={{ questions.previous_page_number|add:"-1"}}">{{ questions.previous_page_number|add:"-1" }}</a></li>  
+    {% endif %}
+    {% if questions.has_previous %}
+      <li><a href="/home/?page={{ questions.previous_page_number }}">{{ questions.previous_page_number }}</a></li>
+    {% endif %}
+      <li class="active"><a href="/home/?page={{ questions.number }}">{{ questions.number }}</a></li>
+    {% if questions.has_next %}
+      <li><a href="/home/?page={{ questions.next_page_number }}">{{ questions.next_page_number }}</a></li>
+    {% endif %}
+    {% if questions.number != questions.paginator.num_pages and questions.number != questions.paginator.num_pages|add:"-1" %}
+      <li><a href="/home/?page={{ questions.next_page_number|add:"1"}}">{{ questions.next_page_number|add:"1" }}</a></li>  
+    {% endif %}
+    {% if questions.has_next %}
+      <li><a href="/home/?page={{ questions.next_page_number}}">»</a></li>
+    {% endif %}    
+  </ul>
+</div>
+{% endblock pagination %}
+

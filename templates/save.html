@@ -1,0 +1,100 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>{% block title %}Base{% endblock title %}</title>
+    <!-- bootstrap files -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+	.ask-searchform
+	{
+		margin-left: 2vw;
+	}
+    a
+    {
+       text-decoration:underline;
+    }
+</style>
+
+</head>
+<body>
+
+<!-- navbar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+			<!-- set laiter
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button> -->
+				<a class="navbar-brand" href="http://127.0.0.1:8000/home">Asksld</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse">
+				<form class="ask-searchform navbar-form navbar-left " role="search" method="GET" action="/ask">
+					<input type="text" class="form-control" placeholder="Search...">
+					<button type="submit"  class="btn btn-success">Ask!</button>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/login">Sign in</a></li>
+					<li><a href="/registration">Register</a></li>
+
+				</ul>
+
+				
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+    
+    
+
+<!-- end of navbar -->
+
+<!-- for content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+    {% block content %}
+    {% endblock content %}
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            <h2> <font color="#848484">Popular Tags</font></h2>
+            <font>Perl</font>
+            <font size = "5" color="red">python</font>
+            <font> technopark</font>
+            <font size = "3" color="red">MySQL</font>
+            <font size = "4" color="#32cd32">django</font>
+            <font> Mail.ru</font>
+            <font color="#ff7f50" size="6"> Firefox</font>
+
+            <div style="margin-top: 2vh">
+                <h2> <font color="#848484">Best Members</font></h2>
+             <ol>
+                 <li><a>Mr. Crowley</a></li>
+                 <li><a>Mr. Crowley</a></li>
+                 <li><a>Mr. Crowley</a></li>
+                 <li><a>Mr. Crowley</a></li>
+                 <li><a>Mr. Crowley</a></li>
+                 <li><a>Mr. Crowley</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% block pagination %} {% endblock pagination %}
+</body>
+</html>
